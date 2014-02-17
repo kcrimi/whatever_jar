@@ -1,27 +1,26 @@
 <?php
 $buttonName = "Melissa Whatever-ed Me";
-
 if (!file_exists('DB.php')) {
 	$message = 'ERROR: Cannot find database file';
 }else {
 	include('DB.php');
 	if (!isset($money)) {
 		$money = 0.0;
-	} else {		
-		if (isset($_POST)) {
-			if($_POST['action'] == "Reset") {
-				$money = 0.0;
-			}
-			elseif ($_POST['action'] == $buttonName) {
-				$money = $money +0.25;
-			}
-			else {
-				$message = 'invalid post';
-			}
-			$money_str = var_export($money, true);
-			$DBtext = "<?php\n\n\$$money = $money_str;\n\n?>";
-			file_put_contents('DB.php', $DBtext);
+	}
+	if (isset($_POST['action'])) {
+		if($_POST['action'] == "Reset") {
+			$money = 0.0;
 		}
+		elseif ($_POST['action'] == $buttonName) {
+			$money = $money +0.25;
+		}
+		else {
+			$message = 'invalid post';
+		}
+		$money_str = var_export($money, true);
+		$DBtext = "<?php\n\n\$money = $money_str;\n\n?>";
+		file_put_contents('DB.php', $DBtext);
+	
 	}
 }
 ?>
@@ -39,8 +38,8 @@ if (!file_exists('DB.php')) {
 			<h1>Whatever Jar</h1>
 			<p class="owes">Melissa currently owes: <?php echo($money);?></p>
 			<div id="jar">
-			<form target="jar.php" method="post">
-				<input type="submit" name="action" value="Melissa Whatever-ed Me"/>
+			<form action="whatever.php" method="post">
+				<input type="submit" name="action" value=<?php echo('"' . $buttonName.'"');?>/>
 				<input type="submit" name="action" value="Reset"/>
 			</form>	
 			</div>
