@@ -1,9 +1,9 @@
 <?php
 $buttonName = "Melissa Whatever-ed Me";					//Name of the button to add a quarter
-
+$message = '';
 //If the database file cannot be found, display an error message
 if (!file_exists('DB.php')) {
-	$message = 'ERROR: Cannot find database file';
+	$message = $message . 'ERROR: Cannot find database file';
 }else {
 	include('DB.php');			//Gets the db file with all variables
 	
@@ -27,7 +27,7 @@ if (!file_exists('DB.php')) {
 		
 		// If this is reached, there something went wrong/someone is hacking
 		else {
-			$message = 'invalid post request';
+			$message = $message . 'invalid post request';
 		}
 		
 		// Save the new value of $money to the DB
@@ -56,7 +56,7 @@ if (!file_exists('DB.php')) {
 		<div class="main">
 			<h1>Whatever Jar</h1>
 			<p class="error_msg"><?php echo($message);?></p>
-			<p class="owes">Melissa currently owes: <?php echo($money);?></p>
+			<p class="owes">Melissa currently owes: <?php echo(number_format($money,2));?></p>
 			<div id="jar">
 			<form action="whatever.php" method="post">
 				<input type="submit" name="action" value=<?php echo('"' . $buttonName.'"');?>/>
