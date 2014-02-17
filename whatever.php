@@ -56,7 +56,7 @@ if (!file_exists('DB.php')) {
 		<div class="main">
 			<h1>Whatever Jar</h1>
 			<p class="error_msg"><?php echo($message);?></p>
-			<p class="owes">Melissa currently owes: <?php echo(number_format($money,2));?></p>
+			<p class="owes">Melissa currently owes: $<?php echo(number_format($money,2));?></p>
 			<div id="jar">
 			<form action="whatever.php" method="post">
 				<input type="submit" name="action" value=<?php echo('"' . $buttonName.'"');?>/>
